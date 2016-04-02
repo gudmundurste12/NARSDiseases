@@ -72,3 +72,6 @@ Can you get NARS to start treating sick people and vaccinating non-sick ones?
 
 
 <{Bob} --> (/, isSick, _, {pharyngitis})>?
+<{John} --> (/, isSick, _, {cancer})>?
+<{Anna} --> (/, isSick, _, {insomnia})>?
+<{Beth} --> (/, isSick, _, {cancer})>?
