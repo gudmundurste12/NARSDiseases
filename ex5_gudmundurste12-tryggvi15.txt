@@ -4,13 +4,18 @@ Tryggvi Þór Guðmundsson, tryggvi15@ru.is, 1405913359
 
 There are people, diseases, symptoms, treatments and vaccinations. 
 <{Bob} --> patient>.
+<{John} --> patient>.
+<{Anna} --> patient>.
 
 Symptoms, treatments and vaccinations apply to diseases. 
 
 
 When somebody exhibits symptoms related to a disease, it increases the likelihood that they have it. 
+
 When somebody has been vaccinated for a disease, they will almost certainly not get it in the future. 
+
 When somebody with a disease is treated for it, they will (probably) no longer have that disease or its symptoms after a while.
+
 
 You should define actual people, diseases, etc. and not just their categories. 
 Create multiple diseases which each have multiple (partially overlapping) symptoms some of
@@ -18,14 +23,14 @@ the time (flu doesn’t always cause muscle aches).
 Define actions for NARS to administer treatments and vaccines, and give it the goal of letting nobody have a disease. 
 Can you get NARS to start treating sick people and vaccinating non-sick ones?
 
+
+
 <{Bob} --> patient>.
-
-
-
 <{Bob} --> [soreThroat]>.
 <{soreThroat} --> symptom>.
 <{throatSickness} --> disease>.
-<{throatSickness} --> [soreThroat]>.
+<{soreThroat} --> (/, isSymptom, _, {throatSickness})>.
 
 // if $x is a symptom of disease $y and $z has it, then $z might be sick with disease $y.
-<(&&, <$x --> symptom>, <$y --> disease>, <(*, $x, $y) --> isSymptom>, <$z --> patient>, <$z --> $x>) ==> <(*, $z, $y) --> isSick>>.
+<(&&, <$x --> symptom>, <$y --> disease>, <$x --> (/, isSymptom, _, $y)>, <$z --> patient>, <$z --> $x>) ==> <$z --> (/, isSick, _, $y)>>.
+
