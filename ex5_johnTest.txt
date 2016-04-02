@@ -1,0 +1,29 @@
+<{John} --> patient>.
+
+<{lumps} --> symptom>.
+<{fatigue} --> symptom>.
+<{coughing} --> symptom>.
+<{headache} --> symptom>.
+
+<{John} --> [lumps]>.
+<{John} --> [fatigue]>.
+<{John} --> [coughing]>.
+<{John} --> [headache]>.
+
+<{cancer} --> disease>.
+
+<{lumps} --> (/, isSymptom, _, {cancer})>.
+<{fatigue} --> (/, isSymptom, _, {cancer})>.
+<{coughing} --> (/, isSymptom, _, {cancer})>.
+<{headache} --> (/, isSymptom, _, {cancer})>.
+
+
+<(&&, <{$x} --> symptom>, <{$y} --> disease>, <{$x} --> (/, isSymptom, _, {$y})>, <{$z} --> patient>, <{$z} --> [$x]>) ==> <{$z} --> (/, isSick, _, {$y})>>.
+<(&&, <{$x} --> symptom>, <{$y} --> disease>, (--, <{$x} --> (/, isSymptom, _, {$y})>), <{$z} --> patient>, <{$z} --> [$x]>) ==> (--,<{$z} --> (/, isSick, _, {$y})>)>.
+//<(&/, (&&, <$x --> patient>, <$y --> disease>), (^vaccinate, $x, $y)) =/> (--, <$x --> (/, isSick, _, $y)>)>.
+//<(&/, (&&, <{$x} --> patient>, <{$z} --> (/, isSymptom, _, {$y})>, <{$x} --> (/, isSick, _, {$y})>), (^treat, {$x}, {$y})) =/> (--, <{$x} --> [$z]>)>.
+
+
+<{John} --> (/, isSick, _, {cancer})>?
+
+//<(&&, <{$x} --> patient>, <{$y} --> disease>) ==> <{$x} --> (/, isSick, _, {$y})>>.
