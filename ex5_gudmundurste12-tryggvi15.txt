@@ -39,18 +39,20 @@ Symptoms, treatments and vaccinations apply to diseases.
 When somebody exhibits symptoms related to a disease, it increases the likelihood that they have it.
 
 // if $x is a symptom of disease $y and $z has symptom $x, then $z might be sick with disease $y.
-<(&&, <$x --> symptom>, <$y --> disease>, <$x --> (/, isSymptom, _, $y)>, <$z --> patient>, <$z --> $x>) ==> <$z --> (/, isSick, _, $y)>>.
+<(&&, <{$x} --> symptom>, <{$y} --> disease>, <{$x} --> (/, isSymptom, _, {$y})>, <{$z} --> patient>, <{$z} --> [$x]>) ==> <{$z} --> (/, isSick, _, {$y})>>.
+
+
 
 
 
 // if $x is not a symptom of disease $y and $z has symptom $x, then $z might not be sick with disease $y.
-<(&&, <$x --> symptom>, <$y --> disease>, (--, <$x --> (/, isSymptom, _, $y)>), <$z --> patient>, <$z --> $x>) ==> (--,<$z --> (/, isSick, _, $y)>)>.
+<(&&, <{$x} --> symptom>, <{$y} --> disease>, (--, <{$x} --> (/, isSymptom, _, {$y})>), <{$z} --> patient>, <{$z} --> [$x]>) ==> (--,<{$z} --> (/, isSick, _, {$y})>)>.
 
 
 When somebody has been vaccinated for a disease, they will almost certainly not get it in the future. 
 
 // if patient $x is vaccinated for disease $y, then patient $x will probably not get sick with disease $y in the future.
-<(&/, (&&, <$x --> patient>, <$y --> disease>), (^vaccinate, $x, $y)) =/> (--, <$x --> (/, isSick, _, $y)>)>.
+<(&/, (&&, <{$x} --> patient>, <{$y} --> disease>), (^vaccinate, {$x}, {$y})) =/> (--, <{$x} --> (/, isSick, _, {$y})>)>.
 
 
 
