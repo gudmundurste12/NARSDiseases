@@ -49,7 +49,12 @@ When somebody exhibits symptoms related to a disease, it increases the likelihoo
 
 When somebody has been vaccinated for a disease, they will almost certainly not get it in the future. 
 
+
+
 When somebody with a disease is treated for it, they will (probably) no longer have that disease or its symptoms after a while.
+
+//If $x is a patient, $z is a symptom of disease $y, and $x is sick and treated for $y, then $x will not have $z
+<(&/, (&&, <{$x} --> patient>, <{$z} --> (/, isSymptom, _, {$y})>, <{$x} --> (/, isSick, _, {$y})>), (^treat, {$x}, {$y})) =/> (--, <{$x} --> [$z]>)>.
 
 
 You should define actual people, diseases, etc. and not just their categories. 
