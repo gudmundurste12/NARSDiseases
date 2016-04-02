@@ -6,9 +6,35 @@ There are people, diseases, symptoms, treatments and vaccinations.
 <{Bob} --> patient>.
 <{John} --> patient>.
 <{Anna} --> patient>.
+<{Beth} --> patient>.
 
 Symptoms, treatments and vaccinations apply to diseases. 
+<{Bob} --> [soreThroat]>.
+<{John} --> [lumps]>.
+<{John} --> [fatigue]>.
+<{John} --> [coughing]>.
+<{John} --> [headache]>.
+<{Anna} --> [headache]>.
+<{Anna} --> [fatigue]>.
+<{Beth} --> [lumps]>.
 
+<{soreThroat} --> symptom>.
+<{lumps} --> symptom>.
+<{fatigue} --> symptom>.
+<{coughing} --> symptom>.
+<{headache} --> symptom>.
+
+<{pharyngitis} --> disease>.
+<{cancer} --> disease>.
+<{insomnia} --> disease>.
+
+<{soreThroat} --> (/, isSymptom, _, {pharyngitis})>.
+<{lumps} --> (/, isSymptom, _, {cancer})>.
+<{fatigue} --> (/, isSymptom, _, {cancer})>.
+<{coughing} --> (/, isSymptom, _, {cancer})>.
+<{headache} --> (/, isSymptom, _, {cancer})>.
+<{fatigue} --> (/, isSymptom, _, {insomnia})>.
+<{headache} --> (/, isSymptom, _, {insomnia})>.
 
 When somebody exhibits symptoms related to a disease, it increases the likelihood that they have it. 
 
@@ -25,11 +51,7 @@ Can you get NARS to start treating sick people and vaccinating non-sick ones?
 
 
 
-<{Bob} --> patient>.
-<{Bob} --> [soreThroat]>.
-<{soreThroat} --> symptom>.
-<{throatSickness} --> disease>.
-<{soreThroat} --> (/, isSymptom, _, {throatSickness})>.
+
 
 // if $x is a symptom of disease $y and $z has symptom $x, then $z might be sick with disease $y.
 <(&&, <$x --> symptom>, <$y --> disease>, <$x --> (/, isSymptom, _, $y)>, <$z --> patient>, <$z --> $x>) ==> <$z --> (/, isSick, _, $y)>>.
