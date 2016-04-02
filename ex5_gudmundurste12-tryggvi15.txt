@@ -1,5 +1,5 @@
 ATAI - Exercise 5
-Guðmundur Stefánsson, gudmundurste12@ru.is
+Guðmundur Stefánsson, gudmundurste12@ru.is, 2608922589
 Tryggvi Þór Guðmundsson, tryggvi15@ru.is, 1405913359
 
 There are people, diseases, symptoms, treatments and vaccinations. 
