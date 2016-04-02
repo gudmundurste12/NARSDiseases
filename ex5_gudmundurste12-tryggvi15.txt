@@ -66,6 +66,7 @@ Define actions for NARS to administer treatments and vaccines, and give it the g
 Can you get NARS to start treating sick people and vaccinating non-sick ones?
 
 
+(--, (&&, <{#x} --> patient>, <{#y} --> disease>, <{#x} --> (/,isSick, _, {#y})>))!
 
 
-
+<{Bob} --> (/, isSick, _, {pharyngitis})>?
