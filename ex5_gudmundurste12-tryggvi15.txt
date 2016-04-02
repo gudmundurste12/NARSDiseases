@@ -31,6 +31,10 @@ Can you get NARS to start treating sick people and vaccinating non-sick ones?
 <{throatSickness} --> disease>.
 <{soreThroat} --> (/, isSymptom, _, {throatSickness})>.
 
-// if $x is a symptom of disease $y and $z has it, then $z might be sick with disease $y.
+// if $x is a symptom of disease $y and $z has symptom $x, then $z might be sick with disease $y.
 <(&&, <$x --> symptom>, <$y --> disease>, <$x --> (/, isSymptom, _, $y)>, <$z --> patient>, <$z --> $x>) ==> <$z --> (/, isSick, _, $y)>>.
 
+
+
+// if $x is not a symptom of disease $y and $z has symptom $x, then $z might not be sick with disease $y.
+<(&&, <$x --> symptom>, <$y --> disease>, (--, <$x --> (/, isSymptom, _, $y)>), <$z --> patient>, <$z --> $x>) ==> (--,<$z --> (/, isSick, _, $y)>)>.
