@@ -36,7 +36,16 @@ Symptoms, treatments and vaccinations apply to diseases.
 <{fatigue} --> (/, isSymptom, _, {insomnia})>.
 <{headache} --> (/, isSymptom, _, {insomnia})>.
 
-When somebody exhibits symptoms related to a disease, it increases the likelihood that they have it. 
+When somebody exhibits symptoms related to a disease, it increases the likelihood that they have it.
+
+// if $x is a symptom of disease $y and $z has symptom $x, then $z might be sick with disease $y.
+<(&&, <$x --> symptom>, <$y --> disease>, <$x --> (/, isSymptom, _, $y)>, <$z --> patient>, <$z --> $x>) ==> <$z --> (/, isSick, _, $y)>>.
+
+
+
+// if $x is not a symptom of disease $y and $z has symptom $x, then $z might not be sick with disease $y.
+<(&&, <$x --> symptom>, <$y --> disease>, (--, <$x --> (/, isSymptom, _, $y)>), <$z --> patient>, <$z --> $x>) ==> (--,<$z --> (/, isSick, _, $y)>)>.
+
 
 When somebody has been vaccinated for a disease, they will almost certainly not get it in the future. 
 
@@ -53,10 +62,3 @@ Can you get NARS to start treating sick people and vaccinating non-sick ones?
 
 
 
-// if $x is a symptom of disease $y and $z has symptom $x, then $z might be sick with disease $y.
-<(&&, <$x --> symptom>, <$y --> disease>, <$x --> (/, isSymptom, _, $y)>, <$z --> patient>, <$z --> $x>) ==> <$z --> (/, isSick, _, $y)>>.
-
-
-
-// if $x is not a symptom of disease $y and $z has symptom $x, then $z might not be sick with disease $y.
-<(&&, <$x --> symptom>, <$y --> disease>, (--, <$x --> (/, isSymptom, _, $y)>), <$z --> patient>, <$z --> $x>) ==> (--,<$z --> (/, isSick, _, $y)>)>.
