@@ -1,4 +1,4 @@
-ATAI - Exercise 5
+ATAI - Exercise 5 (NARS - Diagnosing, treating and preventing disease)
 Guðmundur Stefánsson, gudmundurste12@ru.is, 2608922589
 Tryggvi Þór Guðmundsson, tryggvi15@ru.is, 1405913359
 
@@ -7,6 +7,7 @@ There are people, diseases, symptoms, treatments and vaccinations.
 <{John} --> patient>.
 <{Anna} --> patient>.
 <{Beth} --> patient>.
+<{Dianne} --> patient>.
 
 Symptoms, treatments and vaccinations apply to diseases. 
 <{Bob} --> [soreThroat]>.
@@ -67,7 +68,7 @@ Create multiple diseases which each have multiple (partially overlapping) sympto
 Define actions for NARS to administer treatments and vaccines, and give it the goal of letting nobody have a disease. 
 Can you get NARS to start treating sick people and vaccinating non-sick ones?
 
-
+// there is no patient #x that is sick with disease #y
 (--, (&&, <{#x} --> patient>, <{#y} --> disease>, <{#x} --> (/,isSick, _, {#y})>))!
 
 
