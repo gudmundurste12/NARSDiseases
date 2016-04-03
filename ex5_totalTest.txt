@@ -1,53 +1,59 @@
+//Give NARS the base rules of symptoms and diseases
 // if $x is a symptom of disease $y and $z has symptom $x, then $z might be sick with disease $y.
 <(&&, <{$x} --> (/, isSymptom, _, {$y})>, <{$z} --> [$x]>) ==> <{$z} --> (/, isSick, _, {$y})>>.
-
 
 // if $x is not a symptom of disease $y and $z has symptom $x, then $z might not be sick with disease $y.
 <(&&, (--, <{$x} --> (/, isSymptom, _, {$y})>), <{$z} --> [$x]>) ==> (--,<{$z} --> (/, isSick, _, {$y})>)>.
 
 
+//5762
+
+
+//Introduce NARS to Bob, and have it deduce that Bob has pharyngitis
 <{Bob} --> patient>.
-<{John} --> patient>.
-<{Anna} --> patient>.
-<{Beth} --> patient>.
-
-
-
 <{soreThroat} --> symptom>.
+<{pharyngitis} --> disease>.
+<{soreThroat} --> (/, isSymptom, _, {pharyngitis})>.
+<{Bob} --> [soreThroat]>.
+<{Bob} --> (/, isSick, _, {pharyngitis})>?
+
+//26115
+
+//Introduce NARS to Anna, who has insomnia
+<{Anna} --> patient>.
+<{fatigue} --> symptom>.
+<{headache} --> symptom>.
+<{insomnia} --> disease>.
+<{fatigue} --> (/, isSymptom, _, {insomnia})>.
+<{headache} --> (/, isSymptom, _, {insomnia})>.
+<{Anna} --> [fatigue]>.
+<{Anna} --> [headache]>.
+<{Anna} --> (/, isSick, _, {insomnia})>?
+
+
+
+//Introduce NARS to John, who has cancer
+<{John} --> patient>.
 <{lumps} --> symptom>.
 <{fatigue} --> symptom>.
 <{coughing} --> symptom>.
 <{headache} --> symptom>.
-
-
-<{pharyngitis} --> disease>.
 <{cancer} --> disease>.
-<{insomnia} --> disease>.
-
-
-<{soreThroat} --> (/, isSymptom, _, {pharyngitis})>.
 <{lumps} --> (/, isSymptom, _, {cancer})>.
 <{fatigue} --> (/, isSymptom, _, {cancer})>.
 <{coughing} --> (/, isSymptom, _, {cancer})>.
 <{headache} --> (/, isSymptom, _, {cancer})>.
-<{fatigue} --> (/, isSymptom, _, {insomnia})>.
-<{headache} --> (/, isSymptom, _, {insomnia})>.
-
-
-<{Bob} --> [soreThroat]>.
 <{John} --> [lumps]>.
 <{John} --> [fatigue]>.
 <{John} --> [coughing]>.
 <{John} --> [headache]>.
-<{Anna} --> [headache]>.
-<{Anna} --> [fatigue]>.
-<{Beth} --> [lumps]>.
-
-
-
-<{Bob} --> (/, isSick, _, {pharyngitis})>?
 <{John} --> (/, isSick, _, {cancer})>?
-<{Anna} --> (/, isSick, _, {insomnia})>?
+
+
+
+//Introduce NARS to Beth, who has a symptom of cancer
+<{Beth} --> patient>.
+<{Beth} --> [lumps]>.
 <{Beth} --> (/, isSick, _, {cancer})>?
 
 

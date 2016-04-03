@@ -7,7 +7,7 @@ There are people, diseases, symptoms, treatments and vaccinations.
 <{John} --> patient>.
 <{Anna} --> patient>.
 <{Beth} --> patient>.
-<{Dianne} --> patient>.
+<{Diane} --> patient>.
 
 Symptoms, treatments and vaccinations apply to diseases. 
 <{Bob} --> [soreThroat]>.
