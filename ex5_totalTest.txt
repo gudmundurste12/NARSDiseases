@@ -1,0 +1,71 @@
+// if $x is a symptom of disease $y and $z has symptom $x, then $z might be sick with disease $y.
+<(&&, <{$x} --> (/, isSymptom, _, {$y})>, <{$z} --> [$x]>) ==> <{$z} --> (/, isSick, _, {$y})>>.
+
+
+// if $x is not a symptom of disease $y and $z has symptom $x, then $z might not be sick with disease $y.
+<(&&, (--, <{$x} --> (/, isSymptom, _, {$y})>), <{$z} --> [$x]>) ==> (--,<{$z} --> (/, isSick, _, {$y})>)>.
+
+
+<{Bob} --> patient>.
+<{John} --> patient>.
+<{Anna} --> patient>.
+<{Beth} --> patient>.
+
+
+
+<{soreThroat} --> symptom>.
+<{lumps} --> symptom>.
+<{fatigue} --> symptom>.
+<{coughing} --> symptom>.
+<{headache} --> symptom>.
+
+
+<{pharyngitis} --> disease>.
+<{cancer} --> disease>.
+<{insomnia} --> disease>.
+
+
+<{soreThroat} --> (/, isSymptom, _, {pharyngitis})>.
+<{lumps} --> (/, isSymptom, _, {cancer})>.
+<{fatigue} --> (/, isSymptom, _, {cancer})>.
+<{coughing} --> (/, isSymptom, _, {cancer})>.
+<{headache} --> (/, isSymptom, _, {cancer})>.
+<{fatigue} --> (/, isSymptom, _, {insomnia})>.
+<{headache} --> (/, isSymptom, _, {insomnia})>.
+
+
+<{Bob} --> [soreThroat]>.
+<{John} --> [lumps]>.
+<{John} --> [fatigue]>.
+<{John} --> [coughing]>.
+<{John} --> [headache]>.
+<{Anna} --> [headache]>.
+<{Anna} --> [fatigue]>.
+<{Beth} --> [lumps]>.
+
+
+
+<{Bob} --> (/, isSick, _, {pharyngitis})>?
+<{John} --> (/, isSick, _, {cancer})>?
+<{Anna} --> (/, isSick, _, {insomnia})>?
+<{Beth} --> (/, isSick, _, {cancer})>?
+
+
+
+
+<{?1} --> (/, isSick, _, {?2})>?
+
+
+
+//Noone should be sick
+(--, <{#x} --> (/,isSick, _, {#y})>)!
+
+
+
+//If $x is a patient, $z is a symptom of disease $y, and $x is sick and treated for $y, then $x will not have $z
+<(&/, (&&, <{$z} --> (/, isSymptom, _, {$y})>, <{$x} --> (/, isSick, _, {$y})>), (^treat, {$x}, {$y})) =/> (--, <{$x} --> [$z]>)>.
+
+
+
+// if patient $x is vaccinated for disease $y, then patient $x will probably not get sick with disease $y in the future.
+<(&/, (^vaccinate, {$x}, {$y})) =/> (--, <{$x} --> (/, isSick, _, {$y})>)>.
