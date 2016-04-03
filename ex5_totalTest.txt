@@ -1,15 +1,4 @@
-//Give NARS the base rules of symptoms and diseases
-// if $x is a symptom of disease $y and $z has symptom $x, then $z might be sick with disease $y.
 <(&&, <{$x} --> (/, isSymptom, _, {$y})>, <{$z} --> [$x]>) ==> <{$z} --> (/, isSick, _, {$y})>>.
-
-// if $x is not a symptom of disease $y and $z has symptom $x, then $z might not be sick with disease $y.
-<(&&, (--, <{$x} --> (/, isSymptom, _, {$y})>), <{$z} --> [$x]>) ==> (--,<{$z} --> (/, isSick, _, {$y})>)>.
-
-
-//5762
-
-
-//Introduce NARS to Bob, and have it deduce that Bob has pharyngitis
 <{Bob} --> patient>.
 <{soreThroat} --> symptom>.
 <{pharyngitis} --> disease>.
@@ -17,9 +6,8 @@
 <{Bob} --> [soreThroat]>.
 <{Bob} --> (/, isSick, _, {pharyngitis})>?
 
-//26115
+//448 , 2037, 1174
 
-//Introduce NARS to Anna, who has insomnia
 <{Anna} --> patient>.
 <{fatigue} --> symptom>.
 <{headache} --> symptom>.
@@ -30,9 +18,8 @@
 <{Anna} --> [headache]>.
 <{Anna} --> (/, isSick, _, {insomnia})>?
 
+//580, 6596
 
-
-//Introduce NARS to John, who has cancer
 <{John} --> patient>.
 <{lumps} --> symptom>.
 <{fatigue} --> symptom>.
@@ -75,3 +62,32 @@
 
 // if patient $x is vaccinated for disease $y, then patient $x will probably not get sick with disease $y in the future.
 <(&/, (^vaccinate, {$x}, {$y})) =/> (--, <{$x} --> (/, isSick, _, {$y})>)>.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<(&&, <{$x} --> (/, isSymptom, _, {$y})>, <{$z} --> [$x]>) ==> <{$z} --> (/, isSick, _, {$y})>>.
+<(&/, (&&, <{$z} --> (/, isSymptom, _, {$y})>, <{$x} --> (/, isSick, _, {$y})>), (^treat, {$x}, {$y})) =/> (--, <{$x} --> [$z]>)>.
+<(&/, (^vaccinate, {$x}, {$y})) =/> (--, <{$x} --> (/, isSick, _, {$y})>)>.
+(--, <{#x} --> (/,isSick, _, {#y})>)!
