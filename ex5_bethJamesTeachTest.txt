@@ -1,0 +1,51 @@
+<{Bob} --> patient>.
+<{soreThroat} --> symptom>.
+<{pharyngitis} --> disease>.
+<{soreThroat} --> (/, isSymptom, _, {pharyngitis})>.
+<{Bob} --> [soreThroat]>.
+<{Bob} --> (/, isSick, _, {pharyngitis})>.
+
+
+<{Anna} --> patient>.
+<{fatigue} --> symptom>.
+<{headache} --> symptom>.
+<{insomnia} --> disease>.
+<{fatigue} --> (/, isSymptom, _, {insomnia})>.
+<{headache} --> (/, isSymptom, _, {insomnia})>.
+<{Anna} --> [fatigue]>.
+<{Anna} --> [headache]>.
+<{Anna} --> (/, isSick, _, {insomnia})>.
+
+
+<{John} --> patient>.
+<{lumps} --> symptom>.
+<{fatigue} --> symptom>.
+<{coughing} --> symptom>.
+<{headache} --> symptom>.
+<{cancer} --> disease>.
+<{lumps} --> (/, isSymptom, _, {cancer})>.
+<{fatigue} --> (/, isSymptom, _, {cancer})>.
+<{coughing} --> (/, isSymptom, _, {cancer})>.
+<{headache} --> (/, isSymptom, _, {cancer})>.
+<{John} --> [lumps]>.
+<{John} --> [fatigue]>.
+<{John} --> [coughing]>.
+<{John} --> [headache]>.
+<{John} --> (/, isSick, _, {cancer})>.
+
+
+
+
+<{Beth} --> patient>.
+<{Beth} --> [lumps]>.
+
+<{James} --> patient>.
+<{James} --> [lumps]>.
+<{James} --> [headache]>.
+<{James} --> [soreThroat]>.
+
+
+<{Beth} --> (/, isSick, _, {cancer})>?
+<{James} --> (/, isSick, _, {cancer})>?
+<{James} --> (/, isSick, _, {insomnia})>?
+<{James} --> (/, isSick, _, {pharyngitis})>?
