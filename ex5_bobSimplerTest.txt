@@ -32,5 +32,6 @@
 
 
 <{Bob} --> (/, isSick, _, {pharyngitis})>?
+<?1 --> (/, isSick, _, {pharyngitis})>?
 <{Bob} --> (/, isSick, _, {pharyngitis})>? :|:
 <{Bob} --> [soreThroat]>? :|:
