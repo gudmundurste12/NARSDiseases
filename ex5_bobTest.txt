@@ -1,0 +1,9 @@
+<(&&, <{$x} --> symptom>, <{$y} --> disease>, <{$x} --> (/, isSymptom, _, {$y})>, <{$z} --> patient>, <{$z} --> [$x]>) ==> <{$z} --> (/, isSick, _, {$y})>>.
+<{soreThroat} --> symptom>.
+<{pharyngitis} --> disease>.
+<{Bob} --> patient>.
+<{Bob} --> [soreThroat]>.
+<{soreThroat} --> (/, isSymptom, _, {pharyngitis})>.
+
+
+<{Bob} --> (/, isSick, _, {pharyngitis})>?
