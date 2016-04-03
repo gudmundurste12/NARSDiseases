@@ -1,0 +1,23 @@
+<{Beth} --> patient>.
+<{Beth} --> [lumps]>.
+<{lumps} --> symptom>.
+<{fatigue} --> symptom>.
+<{coughing} --> symptom>.
+<{headache} --> symptom>.
+<{cancer} --> disease>.
+<{Beth} --> (/, isSick, _, {cancer})>.
+<{John} --> patient>.
+<{lumps} --> symptom>.
+<{fatigue} --> symptom>.
+<{coughing} --> symptom>.
+<{headache} --> symptom>.
+<{cancer} --> disease>.
+<{lumps} --> (/, isSymptom, _, {cancer})>.
+<{fatigue} --> (/, isSymptom, _, {cancer})>.
+<{coughing} --> (/, isSymptom, _, {cancer})>.
+<{headache} --> (/, isSymptom, _, {cancer})>.
+<{John} --> [lumps]>.
+<{John} --> [fatigue]>.
+<{John} --> [coughing]>.
+<{John} --> [headache]>.
+<{John} --> (/, isSick, _, {cancer})>?
