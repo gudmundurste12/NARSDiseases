@@ -1,4 +1,5 @@
 <(&&, <{$x} --> (/, isSymptom, _, {$y})>, <{$z} --> [$x]>) ==> <{$z} --> (/, isSick, _, {$y})>>.
+<(&&, (--, <{$x} --> (/, isSymptom, _, {$y})>), <{$z} --> [$x]>) ==> (--,<{$z} --> (/, isSick, _, {$y})>)>.
 <{Bob} --> patient>.
 <{soreThroat} --> symptom>.
 <{pharyngitis} --> disease>.
@@ -44,12 +45,6 @@
 <{Beth} --> (/, isSick, _, {cancer})>?
 
 
-
-
-<{?1} --> (/, isSick, _, {?2})>?
-
-
-
 //Noone should be sick
 (--, <{#x} --> (/,isSick, _, {#y})>)!
 
@@ -62,32 +57,3 @@
 
 // if patient $x is vaccinated for disease $y, then patient $x will probably not get sick with disease $y in the future.
 <(&/, (^vaccinate, {$x}, {$y})) =/> (--, <{$x} --> (/, isSick, _, {$y})>)>.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<(&&, <{$x} --> (/, isSymptom, _, {$y})>, <{$z} --> [$x]>) ==> <{$z} --> (/, isSick, _, {$y})>>.
-<(&/, (&&, <{$z} --> (/, isSymptom, _, {$y})>, <{$x} --> (/, isSick, _, {$y})>), (^treat, {$x}, {$y})) =/> (--, <{$x} --> [$z]>)>.
-<(&/, (^vaccinate, {$x}, {$y})) =/> (--, <{$x} --> (/, isSick, _, {$y})>)>.
-(--, <{#x} --> (/,isSick, _, {#y})>)!

@@ -1,15 +1,15 @@
-ATAI - Exercise 5 (NARS - Diagnosing, treating and preventing disease)
-Guðmundur Stefánsson, gudmundurste12@ru.is, 2608922589
-Tryggvi Þór Guðmundsson, tryggvi15@ru.is, 1405913359
+//ATAI - Exercise 5 (NARS - Diagnosing, treating and preventing disease)
+//Guðmundur Stefánsson, gudmundurste12@ru.is, 2608922589
+//Tryggvi Þór Guðmundsson, tryggvi15@ru.is, 1405913359
 
-There are people, diseases, symptoms, treatments and vaccinations. 
+//There are people, diseases, symptoms, treatments and vaccinations. 
 <{Bob} --> patient>.
 <{John} --> patient>.
 <{Anna} --> patient>.
 <{Beth} --> patient>.
 <{Diane} --> patient>.
 
-Symptoms, treatments and vaccinations apply to diseases. 
+//Symptoms, treatments and vaccinations apply to diseases. 
 <{Bob} --> [soreThroat]>.
 <{John} --> [lumps]>.
 <{John} --> [fatigue]>.
@@ -37,7 +37,6 @@ Symptoms, treatments and vaccinations apply to diseases.
 <{fatigue} --> (/, isSymptom, _, {insomnia})>.
 <{headache} --> (/, isSymptom, _, {insomnia})>.
 
-When somebody exhibits symptoms related to a disease, it increases the likelihood that they have it.
 
 // if $x is a symptom of disease $y and $z has symptom $x, then $z might be sick with disease $y.
 <(&&, <{$x} --> symptom>, <{$y} --> disease>, <{$x} --> (/, isSymptom, _, {$y})>, <{$z} --> patient>, <{$z} --> [$x]>) ==> <{$z} --> (/, isSick, _, {$y})>>.
@@ -47,31 +46,22 @@ When somebody exhibits symptoms related to a disease, it increases the likelihoo
 
 
 // if $x is not a symptom of disease $y and $z has symptom $x, then $z might not be sick with disease $y.
-<(&&, <{$x} --> symptom>, <{$y} --> disease>, (--, <{$x} --> (/, isSymptom, _, {$y})>), <{$z} --> patient>, <{$z} --> [$x]>) ==> (--,<{$z} --> (/, isSick, _, {$y})>)>.
+<(&&, (--, <{$x} --> (/, isSymptom, _, {$y})>), <{$z} --> [$x]>) ==> (--,<{$z} --> (/, isSick, _, {$y})>)>.
 
-
-When somebody has been vaccinated for a disease, they will almost certainly not get it in the future. 
 
 // if patient $x is vaccinated for disease $y, then patient $x will probably not get sick with disease $y in the future.
 <(&/, (&&, <{$x} --> patient>, <{$y} --> disease>), (^vaccinate, {$x}, {$y})) =/> (--, <{$x} --> (/, isSick, _, {$y})>)>.
 
 
-
-When somebody with a disease is treated for it, they will (probably) no longer have that disease or its symptoms after a while.
-
 //If $x is a patient, $z is a symptom of disease $y, and $x is sick and treated for $y, then $x will not have $z
 <(&/, (&&, <{$x} --> patient>, <{$z} --> (/, isSymptom, _, {$y})>, <{$x} --> (/, isSick, _, {$y})>), (^treat, {$x}, {$y})) =/> (--, <{$x} --> [$z]>)>.
 
 
-You should define actual people, diseases, etc. and not just their categories. 
-Create multiple diseases which each have multiple (partially overlapping) symptoms some of the time (flu doesn’t always cause muscle aches). 
-Define actions for NARS to administer treatments and vaccines, and give it the goal of letting nobody have a disease. 
-Can you get NARS to start treating sick people and vaccinating non-sick ones?
-
-// there is no patient #x that is sick with disease #y
-(--, (&&, <{#x} --> patient>, <{#y} --> disease>, <{#x} --> (/,isSick, _, {#y})>))!
+//Noone should be sick
+(--, <{#x} --> (/,isSick, _, {#y})>)!
 
 
+//Some questions
 <{Bob} --> (/, isSick, _, {pharyngitis})>?
 <{John} --> (/, isSick, _, {cancer})>?
 <{Anna} --> (/, isSick, _, {insomnia})>?
