@@ -1,0 +1,36 @@
+<{Bob} --> patient>.
+<{Bob} --> [soreThroat]>. :|:
+
+<{soreThroat} --> symptom>.
+
+<{pharyngitis} --> disease>.
+
+<{soreThroat} --> (/, isSymptom, _, {pharyngitis})>.
+
+// hasSymptom of disease -> might be sick with disease
+// if $x is a symptom of disease $y and $z has symptom $x, then $z might be sick with disease $y.
+<(&&, <{$x} --> (/, isSymptom, _, {$y})>, <{$z} --> [$x]>) ==> <{$z} --> (/, isSick, _, {$y})>>.
+
+// hasSymptom not of disease -> might not be sick with disease
+// if $x is not a symptom of disease $y and $z has symptom $x, then $z might not be sick with disease $y.
+<(&&,(--, <{$x} --> (/, isSymptom, _, {$y})>), <{$z} --> [$x]>) ==> (--,<{$z} --> (/, isSick, _, {$y})>)>.
+
+
+// vaccinate against disease -> might not be sick with diease in the future
+// if patient $x is vaccinated for disease $y, then patient $x will probably not get sick with disease $y in the future.
+<(^vaccinate, {$x}, {$y}) =/> (--, <{$x} --> (/, isSick, _, {$y})>)>.
+
+
+// is treated for symptoms -> might not have symptoms in the future
+// if $x is a patient, $z is a symptom of disease $y, and $x is sick and treated for $y, then $x will not have $z
+<(&/, (&&, <{$z} --> (/, isSymptom, _, {$y})>, <{$x} --> (/, isSick, _, {$y})>), (^treat, {$x}, {$y})) =/> (--, <{$x} --> [$z]>)>.
+
+
+(--, <{#x} --> (/, isSick, _, {#y})>)!
+(&&, <{$y} --> symptom>, (--, <{$x} --> [$y]>))!
+
+
+
+<{Bob} --> (/, isSick, _, {pharyngitis})>?
+<{Bob} --> (/, isSick, _, {pharyngitis})>? :|:
+<{Bob} --> [soreThroat]>? :|:
